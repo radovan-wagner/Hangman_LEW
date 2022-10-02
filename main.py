@@ -3,7 +3,7 @@ from tkinter import ttk
 from random import randint
 
 # inicializacie premennych
-max_pocet_nauhadnutych = 10
+max_pocet_neuhadnutych = 10
 x_zaciatok = 100
 y_zaciatok = 50
 sirka_obdlznika = 45
@@ -20,22 +20,32 @@ pocet_neuhadnutych = dlzka_slova
 pocet_zadanych_pismenok = 0
 
 def spracuj_pismenko( p ):
+    global pocet_zadanych_pismenok
+    global pocet_neuhadnutych
+    global max_pocet_neuhadnutych
     print(f"Funkcia: spracuj_pismenko( {p or 'Nic'} )")
+    print(f"-- pocet_zadanych_pismenok = {pocet_zadanych_pismenok} ")
     pocet_zadanych_pismenok += 1
     pocet_neuhadnutych_pred = pocet_neuhadnutych
-    while pocet_neuhadnutych < max_pocet_nauhadnutych:
+    if pocet_neuhadnutych > 0 and pocet_zadanych_pismenok < max_pocet_neuhadnutych:
         for j in range(0, dlzka_slova ):
             if zvolene_slovo[j] == p:
                 pocet_neuhadnutych -= 1
+    #           can.create_text(x_zaciatok + i * (medzera_medzi_obdlznikmi + sirka_obdlznika) + sirka_obdlznika / 2,
+    #                            y_zaciatok + vyska_obdlznika / 2.25, text=".", fill="#96DED1", font=("Acme 28 "))
                 can.create_text(x_zaciatok + j * (medzera_medzi_obdlznikmi + sirka_obdlznika) + sirka_obdlznika / 2,
                                 y_zaciatok + vyska_obdlznika / 2, text=p, fill="green", font=("Acme 28 "))
                 can.pack()
-    if pocet_neuhadnutych_pred == pocet_neuhadnutych:
-        pocet_neuhadnutych +=1
-        if pocet_neuhadnutych == max_pocet_nauhadnutych:
-            print( "Prehral si." )
-    elif pocet_neuhadnutych == 0:
-            print( "Gratulujem, vyhral si." )
+    if pocet_neuhadnutych_pred > pocet_neuhadnutych:
+        pocet_zadanych_pismenok -=1
+    if pocet_neuhadnutych == 0:
+        print("Gratulujem, vyhral si.")
+        root.destroy()
+    elif pocet_zadanych_pismenok >= max_pocet_neuhadnutych:
+        print( "Prehral si." )
+        root.destroy()
+
+
 
 def ok_bttn():
     pism = pismenko.get()
@@ -77,8 +87,8 @@ for i in range(0, dlzka_slova ):
                              y_zaciatok,
                              x_zaciatok + i * (medzera_medzi_obdlznikmi + sirka_obdlznika) + sirka_obdlznika,
                              y_zaciatok + vyska_obdlznika)
-    can.create_text( x_zaciatok + i * (medzera_medzi_obdlznikmi + sirka_obdlznika) + sirka_obdlznika / 2,
-                             y_zaciatok + vyska_obdlznika / 2.25,  text=".", fill="blue", font=("Acme 28 "))
+    #can.create_text( x_zaciatok + i * (medzera_medzi_obdlznikmi + sirka_obdlznika) + sirka_obdlznika / 2,
+    #                         y_zaciatok + vyska_obdlznika / 2.25,  text=".", fill="blue", font=("Acme 28 "))
 
 can.pack( side="top", expand=False, fill="x", ipadx=10, ipady=10  )
 
