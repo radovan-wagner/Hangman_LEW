@@ -1,0 +1,106 @@
+import tkinter as tk
+from tkinter import ttk
+from random import randint
+
+def spracuj_pismenko( p ):
+    print(f"Funkcia: spracuj_pismenko( {p.get() or 'Nic'} )")
+    pocet_zadanych_pismenok += 1
+    pocet_neuhadnutych_pred = pocet_neuhadnutych
+    while pocet_neuhadnutych < max_pocet_nauhadnutych:
+        for j in range(0, dlzka_slova ):
+            if zvolene_slovo[j] == p:
+                pocet_neuhadnutych -= 1
+                can.create_text(x_zaciatok + j * (medzera_medzi_obdlznikmi + sirka_obdlznika) + sirka_obdlznika / 2,
+                                y_zaciatok + vyska_obdlznika / 2, text=p, fill="green", font=("Acme 28 "))
+                can.pack()
+    if pocet_neuhadnutych_pred == pocet_neuhadnutych:
+        pocet_neuhadnutych +=1
+        if pocet_neuhadnutych == max_pocet_nauhadnutych:
+            print( "Prehral si." )
+    elif pocet_neuhadnutych == 0:
+            print( "Gratulujem, vyhral si." )
+
+def ok_bttn():
+    print( f"Ok button: Písmenko = {pismenko.get() or 'Nic'}" )
+    dlzka_pismenka = len(pismenko)
+    if( dlzka_pismenka == 1  ):
+        spracuj_pismenko( pismenko[0] )
+    elif( dlzka_pismenka > 1 ):
+        spracuj_pismenko( pismenko[dlzka_pismenka-1] )
+    pismenko=""
+
+def return_event(event):
+    ok_bttn()
+
+# inicializacie premennych
+max_pocet_nauhadnutych = 10
+x_zaciatok = 100
+y_zaciatok = 50
+sirka_obdlznika = 45
+vyska_obdlznika = 100
+medzera_medzi_obdlznikmi = 5
+zoznam_slov = ["strom", "jahoda", "matematika", "zemegula", "traktor", "bager", "tchor"]
+pocet_slov = len(zoznam_slov)
+
+# vyber konkretneho slova
+por_cis_slova = randint(1, pocet_slov)
+zvolene_slovo = zoznam_slov[por_cis_slova - 1]
+dlzka_slova = len(zvolene_slovo)
+pocet_neuhadnutych = dlzka_slova
+pocet_zadanych_pismenok = int( 0 )
+
+# program nam vyberie jedno z cisel z intervalu 1 a pocet slov v zozname
+print("Pocet slov:", str(pocet_slov))
+print("Zvolene cislo slova:", str(por_cis_slova))
+print("Zvolene slovo je ", zvolene_slovo)
+print("Dlzka slova je ", str(dlzka_slova))
+
+
+root = tk.Tk()
+root.title("Hangman")
+root.geometry("800x340")
+
+# pomocne premenne
+pismenko = tk.StringVar()
+
+main_frame = tk.Frame( root )
+main_frame.pack( side="top", fill="both", expand=True )
+
+label_1 = tk.Label( main_frame, text="HANGMAN", font=("Acme 40 "), background="yellow" )
+label_1.pack(side="top", expand=False, fill="x", ipadx=10, ipady=10 )
+
+can = tk.Canvas( main_frame, background="#96DED1", width=800, height=180)
+
+for i in range(0, dlzka_slova ):
+    can.create_rectangle(x_zaciatok + i * (medzera_medzi_obdlznikmi + sirka_obdlznika),
+                             y_zaciatok,
+                             x_zaciatok + i * (medzera_medzi_obdlznikmi + sirka_obdlznika) + sirka_obdlznika,
+                             y_zaciatok + vyska_obdlznika)
+    can.create_text( x_zaciatok + i * (medzera_medzi_obdlznikmi + sirka_obdlznika) + sirka_obdlznika / 2,
+                             y_zaciatok + vyska_obdlznika / 2.25,  text=".", fill="blue", font=("Acme 28 "))
+
+can.pack( side="top", expand=False, fill="x", ipadx=10, ipady=10  )
+
+pism_label = tk.Label( root, text="Zadaj písmenko: " )
+pism_label.pack( side="left", padx=10, pady=10, fill="x" )
+
+pism_entry = ttk.Entry( root, width=1, textvariable=pismenko )
+pism_entry.pack( side="left" )
+pism_entry.focus()
+
+root.bind( '<Return>', return_event )
+
+bttn_quit = tk.Button( root, text="Quit", command=root.destroy )
+bttn_quit.pack( side="right", padx=10, pady=10, fill="x", expand=False )
+
+bttn_ok = tk.Button( root, text="Ok", command=ok_bttn )
+bttn_ok.pack( side="right", padx=10, pady=10, fill="x", expand=False )
+
+root.mainloop()
+
+
+
+
+
+
+
