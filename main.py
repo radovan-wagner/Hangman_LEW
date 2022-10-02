@@ -2,8 +2,24 @@ import tkinter as tk
 from tkinter import ttk
 from random import randint
 
+# inicializacie premennych
+max_pocet_nauhadnutych = 10
+x_zaciatok = 100
+y_zaciatok = 50
+sirka_obdlznika = 45
+vyska_obdlznika = 100
+medzera_medzi_obdlznikmi = 5
+zoznam_slov = ["strom", "jahoda", "matematika", "zemegula", "traktor", "bager", "tchor"]
+pocet_slov = len(zoznam_slov)
+
+# vyber konkretneho slova
+por_cis_slova = randint(1, pocet_slov)
+zvolene_slovo = zoznam_slov[por_cis_slova - 1]
+dlzka_slova = len(zvolene_slovo)
+pocet_neuhadnutych = dlzka_slova
+pocet_zadanych_pismenok = 0
 def spracuj_pismenko( p ):
-    print(f"Funkcia: spracuj_pismenko( {p.get() or 'Nic'} )")
+    print(f"Funkcia: spracuj_pismenko( {p or 'Nic'} )")
     pocet_zadanych_pismenok += 1
     pocet_neuhadnutych_pred = pocet_neuhadnutych
     while pocet_neuhadnutych < max_pocet_nauhadnutych:
@@ -21,33 +37,17 @@ def spracuj_pismenko( p ):
             print( "Gratulujem, vyhral si." )
 
 def ok_bttn():
-    print( f"Ok button: Písmenko = {pismenko.get() or 'Nic'}" )
-    dlzka_pismenka = len(pismenko)
+    pism = pismenko.get()
+    print( f"Ok button: Písmenko = {pism or 'Nic'}" )
+    dlzka_pismenka = len( pism )
     if( dlzka_pismenka == 1  ):
-        spracuj_pismenko( pismenko[0] )
+      spracuj_pismenko( pism[0] )
     elif( dlzka_pismenka > 1 ):
-        spracuj_pismenko( pismenko[dlzka_pismenka-1] )
-    pismenko=""
+       spracuj_pismenko( pism[dlzka_pismenka-1] )
+    pism=""
 
 def return_event(event):
     ok_bttn()
-
-# inicializacie premennych
-max_pocet_nauhadnutych = 10
-x_zaciatok = 100
-y_zaciatok = 50
-sirka_obdlznika = 45
-vyska_obdlznika = 100
-medzera_medzi_obdlznikmi = 5
-zoznam_slov = ["strom", "jahoda", "matematika", "zemegula", "traktor", "bager", "tchor"]
-pocet_slov = len(zoznam_slov)
-
-# vyber konkretneho slova
-por_cis_slova = randint(1, pocet_slov)
-zvolene_slovo = zoznam_slov[por_cis_slova - 1]
-dlzka_slova = len(zvolene_slovo)
-pocet_neuhadnutych = dlzka_slova
-pocet_zadanych_pismenok = int( 0 )
 
 # program nam vyberie jedno z cisel z intervalu 1 a pocet slov v zozname
 print("Pocet slov:", str(pocet_slov))
