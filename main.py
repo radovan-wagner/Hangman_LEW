@@ -18,6 +18,7 @@ zvolene_slovo = zoznam_slov[por_cis_slova - 1]
 dlzka_slova = len(zvolene_slovo)
 pocet_neuhadnutych = dlzka_slova
 pocet_zadanych_pismenok = 0
+
 def spracuj_pismenko( p ):
     print(f"Funkcia: spracuj_pismenko( {p or 'Nic'} )")
     pocet_zadanych_pismenok += 1
