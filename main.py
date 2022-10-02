@@ -54,7 +54,8 @@ print("Pocet slov:", str(pocet_slov))
 print("Zvolene cislo slova:", str(por_cis_slova))
 print("Zvolene slovo je ", zvolene_slovo)
 print("Dlzka slova je ", str(dlzka_slova))
-
+pocet_zadanych_pismenok = 0
+print("Počet zadaných písmenok:", pocet_zadanych_pismenok )
 
 root = tk.Tk()
 root.title("Hangman")
