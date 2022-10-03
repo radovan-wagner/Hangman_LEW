@@ -45,8 +45,6 @@ def spracuj_pismenko( p ):
         print( "Prehral si." )
         root.destroy()
 
-
-
 def ok_bttn():
     pism = pismenko.get()
     print( f"Ok button: Písmenko = {pism or 'Nic'}" )
