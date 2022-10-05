@@ -19,6 +19,19 @@ dlzka_slova = len(zvolene_slovo)
 pocet_neuhadnutych = dlzka_slova
 pocet_zadanych_pismenok = 0
 
+def vyhra():
+    label_2 = tk.Label(sprava, text="Gratulujem, vyhrali ste !!!", font=("Acme 20 "), background="green", foreground="white")
+    label_2.pack(side="top", expand=False, fill="x", ipadx=10, ipady=10)
+    # print("Gratulujem, vyhral si.")
+    # root.destroy()
+
+def prehra():
+    label_3 = tk.Label(sprava, text="Prehral si, trapko .... !!!", font=("Acme 20 "), background="red", foreground="yellow" )
+    label_3.pack(side="top", expand=False, fill="x", ipadx=10, ipady=10)
+    # print("Prehral si, trapko ....")
+    # root.destroy()
+
+
 def spracuj_pismenko( p ):
     global pocet_zadanych_pismenok
     global pocet_neuhadnutych
@@ -39,11 +52,9 @@ def spracuj_pismenko( p ):
     if pocet_neuhadnutych_pred > pocet_neuhadnutych:
         pocet_zadanych_pismenok -=1
     if pocet_neuhadnutych == 0:
-        print("Gratulujem, vyhral si.")
-        root.destroy()
+        vyhra()
     elif pocet_zadanych_pismenok >= max_pocet_neuhadnutych:
-        print( "Prehral si." )
-        root.destroy()
+        prehra()
 
 def ok_bttn():
     pism = pismenko.get()
@@ -67,7 +78,7 @@ print("Počet zadaných písmenok:", pocet_zadanych_pismenok )
 
 root = tk.Tk()
 root.title("Hangman")
-root.geometry("800x340")
+root.geometry("800x400")
 
 # pomocne premenne
 pismenko = tk.StringVar()
@@ -89,6 +100,9 @@ for i in range(0, dlzka_slova ):
     #                         y_zaciatok + vyska_obdlznika / 2.25,  text=".", fill="blue", font=("Acme 28 "))
 
 can.pack( side="top", expand=False, fill="x", ipadx=10, ipady=10  )
+
+sprava = tk.Canvas( main_frame, background="gray", width=800, height=60)
+sprava.pack( side="top", expand=False, fill="x", ipadx=10, ipady=10  )
 
 pism_label = tk.Label( root, text="Zadaj písmenko: " )
 pism_label.pack( side="left", padx=10, pady=10, fill="x" )
