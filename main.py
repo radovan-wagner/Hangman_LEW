@@ -31,7 +31,6 @@ def prehra():
     # print("Prehral si, trapko ....")
     # root.destroy()
 
-
 def spracuj_pismenko( p ):
     global pocet_zadanych_pismenok
     global pocet_neuhadnutych
