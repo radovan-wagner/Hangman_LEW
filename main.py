@@ -20,13 +20,13 @@ pocet_neuhadnutych = dlzka_slova
 pocet_zadanych_pismenok = 0
 
 def vyhra():
-    label_2 = tk.Label(sprava, text="Gratulujem, vyhrali ste !!!", font=("Acme 20 "), background="green", foreground="white")
+    label_2 = tk.Label(sprava, text="Gratulujem, vyhrali ste !!!", font=("Acme 20 "), background="gray", foreground="green")
     label_2.pack(side="top", expand=False, fill="x", ipadx=10, ipady=10)
     # print("Gratulujem, vyhral si.")
     # root.destroy()
 
 def prehra():
-    label_3 = tk.Label(sprava, text="Prehral si, trapko .... !!!", font=("Acme 20 "), background="red", foreground="yellow" )
+    label_3 = tk.Label(sprava, text="Prehral si, trapko .... !!!", font=("Acme 20 "), background="gray", foreground="red" )
     label_3.pack(side="top", expand=False, fill="x", ipadx=10, ipady=10)
     # print("Prehral si, trapko ....")
     # root.destroy()
@@ -64,6 +64,7 @@ def ok_bttn():
     elif( dlzka_pismenka > 1 ):
        spracuj_pismenko( pism[dlzka_pismenka-1] )
     pism=""
+    pismenko.set( "" )
 
 def return_event(event):
     ok_bttn()
@@ -77,7 +78,7 @@ print("Počet zadaných písmenok:", pocet_zadanych_pismenok )
 
 root = tk.Tk()
 root.title("Hangman")
-root.geometry("800x400")
+root.geometry("800x420")
 
 # pomocne premenne
 pismenko = tk.StringVar()
