@@ -28,6 +28,7 @@ def vyhra():
 def prehra():
     label_3 = tk.Label(sprava, text="Prehral si, trapko .... !!!", font=("Acme 20 "), background="gray", foreground="red" )
     label_3.pack(side="top", expand=False, fill="x", ipadx=10, ipady=10)
+
     # print("Prehral si, trapko ....")
     # root.destroy()
 
