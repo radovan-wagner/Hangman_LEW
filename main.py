@@ -14,7 +14,7 @@ pocet_slov = len(zoznam_slov)                   # počet slov, z ktorých náhod
 
 # vyber konkretneho slova
 por_cis_slova = randint(1, pocet_slov)          # náhodne vyberieme jedno slovo z intervalu 1 až počet slov
-zvolene_slovo = zoznam_slov[por_cis_slova - 1]  # táto premenná bude obsahovať vybrané slovo, ktoré budeme hádať
+zvolene_slovo = list(zoznam_slov[por_cis_slova - 1])  # táto premenná bude obsahovať jednotlivé písmená zvoleného slova
 dlzka_slova = len(zvolene_slovo)                # dĺžka slova, ktoré sme vybrali
 pocet_neuhadnutych = dlzka_slova                # táto premenná hovorí o tom, koľko ešte písmenok je neuhádnutých
 pocet_zle_zadanych_pismenok = 0                 # tu budeme napočítavať zle zadané písmenká (aj opakovanie dobrého)
@@ -47,6 +47,7 @@ def spracuj_pismenko( p ):
     global pocet_zle_zadanych_pismenok          # nechceme vo funkcii použiť novú, ale globálne deklarovanú premennú
     global pocet_neuhadnutych                   # nechceme vo funkcii použiť novú, ale globálne deklarovanú premennú
     global max_pocet_neuhadnutych               # nechceme vo funkcii použiť novú, ale globálne deklarovanú premennú
+    global zvolene_slovo                        # aby sme mohli vo funkcii aktualizovať reťazec - uhádnuté písmenká
     print(f"Funkcia: spracuj_pismenko( {p or 'Nic'} )")     # diagnostická správa na konzole
     pocet_zle_zadanych_pismenok += 1            # vopred navýšime počet zle zadaných písmenok
     pocet_neuhadnutych_pred = pocet_neuhadnutych    # toto budeme testovať po vyhodnotení, či bolo aspoň jedno uhádnuté
@@ -55,8 +56,8 @@ def spracuj_pismenko( p ):
             if zvolene_slovo[j] == p:           # porovnávame so zadaným písmenkom
                 pocet_neuhadnutych -= 1         # uhádnuté písmenko - znížíme počet neuhádnutých písmenok o jedno
                                                 # a vpíšeme do obdĺžnička písmenko na dané miesto
-#                zvolene_slovo[j] = '?'          # prepíšeme písmenko v slove, aby sme neprofitovali z už uhádnutých - tu musím nájsť vhodn[ funkciu, ktorá to urobí
-                # v texte vpíšeme písmenko vo štvorčekoch, aby sme neprofitovali z už uhádnutých
+                zvolene_slovo[j] = '?'          # prepíšeme písmenko v slove, aby sme neprofitovali z už uhádnutých - tu musím nájsť vhodn[ funkciu, ktorá to urobí
+                # v texte vpíšeme písmenko vo štvorčekoch
                 can.create_text(x_zaciatok + j * (medzera_medzi_obdlznikmi + sirka_obdlznika) + sirka_obdlznika / 2,
                                 y_zaciatok + vyska_obdlznika / 2, text=p, fill="green", font=("Acme 28 "))
                 can.pack()                      # zobrazíme písmenko
