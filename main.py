@@ -55,7 +55,7 @@ def spracuj_pismenko( p ):
             if zvolene_slovo[j] == p:           # porovnávame so zadaným písmenkom
                 pocet_neuhadnutych -= 1         # uhádnuté písmenko - znížíme počet neuhádnutých písmenok o jedno
                                                 # a vpíšeme do obdĺžnička písmenko na dané miesto
-                zvolene_slovo[j] = '?'          # prepíšeme písmenko v slove, aby sme neprofitovali z už uhádnutých - tu musím nájsť vhodn[ funkciu, ktorá to urobí
+                zvolene_slovo[j] = '@'          # prepíšeme písmenko v slove, aby sme neprofitovali z už uhádnutých - tu musím nájsť vhodn[ funkciu, ktorá to urobí
                 # v texte vpíšeme písmenko vo štvorčekoch
                 can.create_text(x_zaciatok + j * (medzera_medzi_obdlznikmi + sirka_obdlznika) + sirka_obdlznika / 2,
                                 y_zaciatok + vyska_obdlznika / 2, text=p, fill="green", font=("Acme 28 "))
