@@ -14,7 +14,7 @@ pocet_slov = len(zoznam_slov)                   # počet slov, z ktorých náhod
 
 # vyber konkretneho slova
 por_cis_slova = randint(1, pocet_slov)          # náhodne vyberieme jedno slovo z intervalu 1 až počet slov
-zvolene_slovo = list(zoznam_slov[por_cis_slova - 1])  # táto premenná bude obsahovať jednotlivé písmená zvoleného slova
+zvolene_slovo = list( zoznam_slov[por_cis_slova - 1].upper())  # táto premenná bude obsahovať jednotlivé velke písmená zvoleného slova
 dlzka_slova = len(zvolene_slovo)                # dĺžka slova, ktoré sme vybrali
 pocet_neuhadnutych = dlzka_slova                # táto premenná hovorí o tom, koľko ešte písmenok je neuhádnutých
 pocet_zle_zadanych_pismenok = 0                 # tu budeme napočítavať zle zadané písmenká (aj opakovanie dobrého)
@@ -42,12 +42,11 @@ def prehra():
     bttn_quit_3.pack(side="right", padx=10, pady=10, fill="x", expand=False)    # Po stlačení buttonu Quit zahubí vlastné okno a skončí
 
 # definícia funkcie, spracuje jedno zadané písmenko. Ak ich do formuláru zadáme viac, použije iba to posledné
-# Nemáme ošetrené znovu zadané už raz uhádnuté písmenko
 def spracuj_pismenko( p ):
     global pocet_zle_zadanych_pismenok          # nechceme vo funkcii použiť novú, ale globálne deklarovanú premennú
     global pocet_neuhadnutych                   # nechceme vo funkcii použiť novú, ale globálne deklarovanú premennú
     global max_pocet_neuhadnutych               # nechceme vo funkcii použiť novú, ale globálne deklarovanú premennú
-    global zvolene_slovo                        # aby sme mohli vo funkcii aktualizovať reťazec - uhádnuté písmenká
+    # global zvolene_slovo                        # aby sme mohli vo funkcii aktualizovať reťazec - uhádnuté písmenká
     print(f"Funkcia: spracuj_pismenko( {p or 'Nic'} )")     # diagnostická správa na konzole
     pocet_zle_zadanych_pismenok += 1            # vopred navýšime počet zle zadaných písmenok
     pocet_neuhadnutych_pred = pocet_neuhadnutych    # toto budeme testovať po vyhodnotení, či bolo aspoň jedno uhádnuté
@@ -63,6 +62,7 @@ def spracuj_pismenko( p ):
                 can.pack()                      # zobrazíme písmenko
     if pocet_neuhadnutych_pred > pocet_neuhadnutych:    # Ak sme uhádli aspoň jedno
         pocet_zle_zadanych_pismenok -=1         # vopred sme si zvýšili premennú s počtom zle zadaných, teraz znížime
+        print("Zvolene slovo je ", zvolene_slovo)   # toto je len aby sme videli, ako vymiename uz uhadnute pismenka za otazniky
     if pocet_neuhadnutych == 0:                 # Ak sme už uhádli všetky
         vyhra()                                 # zavoláme funkciu s gratuláciou
     elif pocet_zle_zadanych_pismenok >= max_pocet_neuhadnutych:     # Ak sme prekročili maximum povolených neuhádnutých
@@ -75,7 +75,7 @@ def ok_bttn():
     print( f"Ok button: Písmenko = {pism or 'Nic'}" )       # iba diagnostická správa do konzoly
     dlzka_pismenka = len( pism )                # ošetrenie ak zadáme viac písmenok
     if( dlzka_pismenka == 1  ):                 # bolo zadané iba jedno
-      spracuj_pismenko( pism[0] )               # spracujeme ho
+      spracuj_pismenko( pism[0].upper() )       # skonvertujeme na velke a spracujeme ho
     elif( dlzka_pismenka > 1 ):                 # bolo zadaných viacero písmenok
        spracuj_pismenko( pism[dlzka_pismenka-1] )   # zoberie sa iba posledné písmenko a spracujeme ho
     pism=""                                     # vymažeme premennú písmenko
